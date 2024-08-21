@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <title>Prediction Result</title>
+  </head>
+  <style>
+    body{
+    font-family: system-ui;
+    background-color: #e5e5f7;
+      opacity: 1;
+      background-image:  radial-gradient(#444cf7 0.5px, transparent 0.5px), radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0,10px 10px;
+}
+nav {
+  color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-image: none !important;
+      background-color: #1a3636;
+      padding: 3px 0;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+      
+    }
+    img{
+      display: block;
+      width: 400px; 
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1,p,h3{max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+p{
+  font-size: smaller;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: transparent;
+  padding: 10px;
+  margin-top:13vh;
+  grid-gap: 20px;
+
+}
+.grid-item {
+  background-color: white;
+  border-radius: 50px;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+.describe{
+margin-top: 5vh;
+}
+
+  </style>
+  <body>
+
+    <nav id="main-nav">
+      <h1>Bladder Tissue Health Prediction</h1>
+    </nav>
+
+
+    <div class="grid-container">
+      <div class="grid-item"><h3>Class Probability Variation</h3>
+      <img src="{{ graph_url }}" alt="Class Probabilities"></div>
+      <div class="grid-item" id="stylish-grid" ><h3>Your Endoscopic Tissue Prediction</h3>
+      <p>The predicted class is: {{ prediction }}</p>
+      {% if prediction == 'HGC' %}
+        <h3>What is HGC (High-Grade Carcinoma)?</h3>
+      <p>
+        High-Grade Carcinoma (HGC) is a type of bladder cancer where the cells are more abnormal compared to low-grade cancers. These cells tend to grow and spread more aggressively, increasing the risk of the cancer invading deeper into the bladder wall and potentially spreading to other parts of the body.
+      </p>
+      {% endif %}
+      {% if prediction == 'LGC' %}
+      <h3>What is LGC (Low-Grade Carcinoma)?</h3>
+      <p>
+        Low-Grade Carcinoma (LGC) is a type of bladder cancer where the cells appear more normal compared to high-grade cancers. LGC typically grows slowly and is less likely to spread to other parts of the body. However, it can recur after treatment and, if left untreated, may develop into a more aggressive form of cancer.
+      </p>
+      {% endif %}
+      {% if prediction == 'NST' %}
+      <h3>What is NST (Normal Squamous Tissue)?</h3>
+      <p>
+        Normal Squamous Tissue (NST) refers to the healthy, flat, and thin cells that line various organs in the body, including the bladder. This tissue type is typically associated with normal functioning and is not indicative of cancer or other pathological conditions.
+      </p>
+      {% endif %}
+      {% if prediction == 'NTL' %}
+      <h3>What is NTL (Normal Transitional Epithelium)?</h3>
+      <p>
+        Normal Transitional Epithelium (NTL) is a healthy tissue that lines the inside of the bladder and other parts of the urinary tract. This type of tissue is flexible and can stretch to accommodate the bladder’s expansion and contraction as it fills and empties.
+      </p>
+      {% endif %}
+
+    </div>
+    <div class="grid-item">
+      {% if prediction == 'HGC' %}
+      <h3 class="describe">How Does HGC Occur?</h3>
+      <p>
+        HGC occurs when the cells lining the inside of the bladder become malignant and start to grow uncontrollably. Factors that may contribute to the development of HGC include exposure to certain chemicals (such as those found in tobacco smoke), chronic bladder inflammation, and genetic mutations. The aggressive nature of HGC makes it a more serious condition that requires immediate medical attention.
+      </p>
+      {% endif %}
+      {% if prediction == 'LGC' %}
+      <h3 class="describe">How Does LGC Occur?</h3>
+      <p>
+        LGC occurs when the cells lining the inside of the bladder begin to grow abnormally but at a slower rate than high-grade carcinomas. Factors contributing to the development of LGC may include smoking, chronic bladder irritation or infection, and exposure to certain chemicals. While LGC is generally less aggressive, it still requires medical attention to prevent progression.
+      </p>
+      {% endif %}
+      {% if prediction == 'NST' %}
+      <h3 class="describe">How Does NST Occur?</h3>
+      <p>
+        NST is a normal tissue type that lines the bladder and other organs, playing a role in protecting underlying tissues and facilitating various functions. Its presence is a positive sign, indicating that the tissue in question is healthy and normal.
+      </p>
+      {% endif %}
+      {% if prediction == 'NTL' %}
+      <h3 class="describe">How Does NTL Occur?</h3>
+      <p>
+        NTL is a normal tissue type that lines the bladder and other urinary organs. Its presence indicates that the tissue is functioning properly and is not affected by any malignant conditions.
+      </p>
+      {% endif %}
+    </div>
+
+    <div class="grid-item">
+      {% if prediction == 'HGC' %}
+      <h3 class="describe">What Should You Do?</h3>
+      <p>
+        If your bladder tissue image has been classified as HGC, it’s crucial to seek medical advice promptly. Early diagnosis and treatment are key to managing HGC. Treatment options may include surgery, chemotherapy, radiation therapy, or immunotherapy, depending on the stage and extent of the cancer. Regular follow-ups with your healthcare provider are also essential to monitor your condition and prevent recurrence.
+      </p>
+      {% endif %}
+      {% if prediction == 'LGC' %}
+      <h3 class="describe">What Should You Do?</h3>
+      <p>
+        If your bladder tissue image has been classified as LGC, it’s important to consult with a healthcare provider for further evaluation. Treatment options for LGC often include regular monitoring, surgery to remove the tumor, and intravesical therapy to prevent recurrence. Early treatment and regular follow-ups are crucial to managing LGC and reducing the risk of the cancer becoming more advanced.
+      </p>
+      {% endif %}
+      {% if prediction == 'NST' %}
+      <h3 class="describe">What Should You Do?</h3>
+      <p>
+        If your bladder tissue image has been classified as NST, it means the tissue is normal and healthy. No immediate action is necessary, but maintaining regular health check-ups and monitoring any symptoms is always advisable to ensure ongoing bladder health.
+      </p>
+      {% endif %}
+      {% if prediction == 'NTL' %}
+      <h3 class="describe">What Should You Do?</h3>
+      <p>
+        If your bladder tissue image has been classified as NTL, it suggests that the tissue is normal and healthy. No immediate medical action is needed, but maintaining regular check-ups and staying vigilant about bladder health is important.
+      </p>
+      {% endif %}
+
+
+    </div>
+    
+    
+    
+  </body>
+</html>
