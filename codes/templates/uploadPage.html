@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload an Image</title>
+  </head>
+  <style>
+    body{
+      font-family: system-ui;
+      background-color: #e5e5f7;
+      opacity: 1;
+      background-image:  radial-gradient(#444cf7 0.5px, transparent 0.5px), radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0,10px 10px; 
+}
+    
+  
+  nav {
+    color: white;
+      position: fixed;
+      display: flex;
+      top: 0;
+      left: 0;
+      background-image: none !important;
+      width: 100%;
+      background-color: #1A3636;
+      padding: 3px 0;
+      z-index: 10;
+      
+      
+    }
+    
+    
+    #upload-field{
+    -webkit-box-shadow: 10px 10px 53px 0px rgba(0,0,0,0.47);
+    -moz-box-shadow: 10px 10px 53px 0px rgba(0,0,0,0.47);
+    box-shadow: 10px 10px 53px 0px rgba(0,0,0,0.47);
+    margin-top: 25vh;
+    padding:10px 70px 20px 70px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    transition: box-shadow 0.7s;
+    
+  }
+ 
+    #imagePreview {
+        display: none;
+        width: 300px;
+        height: auto;
+        margin-top: 20px;
+      }
+
+
+     #loader-container{ border-top: 5px solid rgb(1, 9, 37);border-radius: 50%;width: 40px;height: 40px;display: none;margin-left: 140px; margin-top: 40px; animation: spinner 1s ease infinite;}
+      
+      @keyframes spinner {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+}
+input[type=file]::file-selector-button {
+  border: 3px solid #b76a47;
+  padding: .2em .4em;
+  border-radius: .2em;
+  background-color: #b76a47;
+  transition: 0.7s;
+}
+input[type=file]::file-selector-button:hover {
+  background-color: #d8a892;
+  border: 3px solid #d8a892;
+} 
+#submit {
+  color: white;
+  border: 3px solid #24135a;
+  padding: .2em .4em;
+  border-radius: .2em;
+  background-color: #24135a;
+  transition: 0.7s;
+}
+#submit:hover {
+ 
+  background-color: #4f75a8;
+  border: 3px solid #4f75a8;
+} 
+  </style>
+  <body>
+    
+      <nav id="main-nav">
+        
+        <h1 style="margin-left: auto;
+        margin-right: auto;">Bladder Tissue Health Prediction</h1>
+      </nav>
+      
+      
+    <div id="upload-field">
+      <h2 style="margin:0 0 20px 0; text-align: center;">Upload an Image</h2>
+      <img id="imagePreview" src="#" alt="Image Preview">
+      <form method="post" enctype="multipart/form-data" id="my-form" style="margin-top: 35px;">
+      <input type="file"   name="image"   onchange="loadFile(event)" size="100" >
+      <input type="submit" value="Upload" id="submit" >
+      
+    </form>
+    <span id="loader-container"></span>
+  
+    
+  </div>
+    
+  
+    <script>
+      
+      var loadFile = function(event) {
+        var image = document.getElementById('imagePreview');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        image.style.display='block';
+      };
+      // Show loading spinner on form submission
+      document.getElementById('my-form').addEventListener('submit', function(event) {
+        var spinner = document.getElementById('loader-container');
+        spinner.style.display = 'inline-block';
+      });
+
+     
+
+
+      
+
+      </script>
+    
+  </body>
+</html>
