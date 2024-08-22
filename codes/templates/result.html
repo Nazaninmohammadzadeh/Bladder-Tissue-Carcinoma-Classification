@@ -28,12 +28,19 @@ nav {
       transition: background-color 0.3s ease;
       
     }
-    img{
-      display: block;
+    #graph{
+      display: inline-block;
       width: 400px; 
       height: auto;
       margin-left: auto;
+      
+    }
+    #img{
+      display: inline-block;
+      width: 240px; 
+      height: 200px;
       margin-right: auto;
+      
     }
     h1,p,h3{max-width: fit-content;
   margin-left: auto;
@@ -72,7 +79,9 @@ margin-top: 5vh;
 
     <div class="grid-container">
       <div class="grid-item"><h3>Class Probability Variation</h3>
-      <img src="{{ graph_url }}" alt="Class Probabilities"></div>
+      <img src="{{ graph_url }}" alt="Class Probabilities" id="graph">
+      <img src="{{ image_url }}" alt="Uploaded Image" id="img">
+    </div>
       <div class="grid-item" id="stylish-grid" ><h3>Your Endoscopic Tissue Prediction</h3>
       <p>The predicted class is: {{ prediction }}</p>
       {% if prediction == 'HGC' %}
