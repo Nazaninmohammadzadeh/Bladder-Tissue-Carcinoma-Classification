@@ -10,7 +10,7 @@ import keras
 app = Flask(__name__)
 
 # Load pre-trained model
-model =keras.saving.load_model('D:\\Mimari\\2021123123_NazaninMohammadzadeh\\projects\\endoscopic_tissue_prediction\\endoPreModel.keras')
+model =keras.saving.load_model('/The path to the model/')
 
 class_names = {
     0: "HGC",
@@ -19,6 +19,9 @@ class_names = {
     3: "NTL"
 }
 
+'''
+Converts the image to RGB format, resizes it to the target dimensions, and adds an extra dimension to prepare it for model prediction. This ensures compatibility with models expecting RGB input with a specific size.
+'''
 def preprocess_image(image, target_size):
     image = image.convert('RGB')  # Ensure image has 3 channels
     image = image.resize(target_size)
@@ -26,11 +29,16 @@ def preprocess_image(image, target_size):
     return image
 
 
-
+'''
+Takes a pre-trained model and an input image, uses the model to predict the class probabilities for the image, and returns the prediction results.
+'''
 def predict_image(model, image):
     prediction = model.predict(image)
     return prediction
 
+'''
+Generates a bar plot that visualizes the class probabilities predicted by the model. It labels the bars with class names, sets the axis titles, and saves the plot as an image (probabilities.png) in the static folder.
+'''
 def plot_probabilities(probabilities):
     # Generate a bar plot of the class probabilities
     classes = list(range(probabilities.shape[1]))  # Assuming class indices are 0, 1, 2, ..., n-1
@@ -46,12 +54,18 @@ def plot_probabilities(probabilities):
     plt.savefig('static/probabilities.png')  # Save the plot to the static folder
     plt.close()
 
+'''
+The favicon route function serves the favicon.ico file from the static directory. It returns the favicon image when requested by the browser, ensuring the correct icon is displayed in the browser tab.
+'''
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-                               
+
+'''
+ The upload_predict route processes uploaded images, saves them to static/uploads, and then preprocesses the image for prediction. It uses the model to predict the class, generates a probability graph, and returns the prediction and image URLs to be rendered in result.html. For GET requests, it renders uploadPage.html.
+'''                              
 @app.route("/", methods=["GET", "POST"])
 def upload_predict():
     if request.method == "POST":
@@ -82,5 +96,10 @@ def upload_predict():
                                    image_url=image_url)
     return render_template('uploadPage.html')
 
+
+
+'''
+Runs the Flask app on all network interfaces (0.0.0.0) at port 5000 with debugging enabled.
+'''
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
