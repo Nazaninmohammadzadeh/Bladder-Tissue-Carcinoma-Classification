@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template,send_from_directory
+from flask import Flask, request, render_template,send_from_directory,url_for
 import os
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -10,7 +10,7 @@ import keras
 app = Flask(__name__)
 
 # Load pre-trained model
-model =keras.saving.load_model('/path-to-your-model/')
+model =keras.saving.load_model('D:\\Mimari\\2021123123_NazaninMohammadzadeh\\projects\\endoscopic_tissue_prediction\\endoPreModel.keras')
 
 class_names = {
     0: "HGC",
@@ -57,18 +57,30 @@ def upload_predict():
     if request.method == "POST":
         image_file = request.files["image"]
         if image_file:
-            image = Image.open(image_file)
+            # Save the image to the static/uploads directory
+            upload_folder = 'static/uploads'
+            os.makedirs(upload_folder, exist_ok=True)  # Ensure the directory exists
+            image_path = os.path.join(upload_folder, image_file.filename)
+            image_file.save(image_path)
+
+            # Process the image
+            image = Image.open(image_path)
             processed_image = preprocess_image(image, target_size=(224, 224))
             prediction = predict_image(model, processed_image)
             predicted_index = np.argmax(prediction, axis=1)[0]
             predicted_class = class_names.get(predicted_index, "Unknown")  # Translate index to class name
+            
             # Generate the probability graph
             plot_probabilities(prediction)
+            
+            # Generate the URL for the image
+            image_url = url_for('static', filename='uploads/' + image_file.filename)
+            
             return render_template('result.html', 
                                    prediction=predicted_class,
-                                   graph_url='/static/probabilities.png')
+                                   graph_url='/static/probabilities.png',
+                                   image_url=image_url)
     return render_template('uploadPage.html')
-    
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
