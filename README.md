@@ -130,6 +130,9 @@ By training only the latter half of the model, we could effectively fine-tune th
 | **macro avg**| 1.00      | 1.00   | 1.00     | 420     |
 | **weighted avg** | 1.00  | 1.00   | 1.00     | 420     |
 
+
+ ![__results___38_0](https://github.com/user-attachments/assets/4443e697-dc7a-41b0-8cbd-8c81b1875cb2)
+
 ### 6.2 Model Comparison
 
 - **Pre-trained EfficientNet vs. Custom CNN:**  
@@ -150,7 +153,7 @@ By training only the latter half of the model, we could effectively fine-tune th
 - **Result Visualization:**  
   Implemented a feature to display uploaded images alongside their predicted class labels on the web interface.
 
-  ![__results___38_0](https://github.com/user-attachments/assets/4443e697-dc7a-41b0-8cbd-8c81b1875cb2)
+ 
 
 
 ### 7.2 Future Work
