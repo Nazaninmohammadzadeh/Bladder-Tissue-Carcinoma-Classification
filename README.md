@@ -56,6 +56,7 @@ Data preprocessing is a crucial step in any machine learning project, particular
 ## 4. Data Augmentation
 
 Data augmentation is a technique used to artificially increase the size and diversity of the training dataset by applying various transformations to the images. The purpose of data augmentation is to improve the model's generalization capabilities, making it more robust to variations in the input data and reducing the risk of overfitting. By simulating different scenarios, such as changes in brightness, contrast, orientation, and scale, data augmentation enables the model to see the same images from different perspectives and dimensions. This exposure helps the model become better equipped to handle real-world variations in endoscopic bladder tissue images, ultimately enhancing its ability to make accurate predictions.
+![EfficientNetB0-architecture-36](https://github.com/user-attachments/assets/c11162fc-b27b-4db2-9dc1-f03d337edef0)
 
 ### Augmentation Methods
 
@@ -70,7 +71,7 @@ Data augmentation is a technique used to artificially increase the size and dive
 
 - **Base Models:**  
   EfficientNetB0 was selected for its balance of accuracy and efficiency. The MBConv6 architecture in EfficientNetB0 is a key block that combines efficiency and performance, making it well-suited for image classification tasks, including bladder cancer classification.
-![efficientNet structure](https://www.researchgate.net/profile/Francis-Jesmar-Montalbo/publication/357622806/figure/fig2/AS:1119949779144707@1644028243890/EfficientNetB0-architecture-36.png)
+
 
 **Overview of MBConv6:**
 
