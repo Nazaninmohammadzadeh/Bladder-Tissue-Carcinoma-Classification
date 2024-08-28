@@ -124,6 +124,5 @@ Bladder cancer is a significant health concern, representing about 4% of all can
 
 ### References
 
-1. [Zenodo](https://zenodo.org/records/7741476)
-2. [Kaggle](https://www.kaggle.com/datasets/aryashah2k/endoscopic-bladder-tissue-classification-
-dataset/data)
+1. https://zenodo.org/records/7741476
+2. https://www.kaggle.com/datasets/aryashah2k/endoscopic-bladder-tissue-classification-dataset/data
