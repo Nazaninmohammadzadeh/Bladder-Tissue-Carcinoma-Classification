@@ -1,7 +1,13 @@
 Flask Version: 3.0.3
 Pillow Version: 9.5.0
-matplotlib Version: 3.9.2
-numpy Version: 1.26.4
-tensorflow Version: 2.17.0
-keras Version: 3.5.0
+Matplotlib Version: 3.9.2
+NumPy Version: 1.26.4
+Tensorflow Version: 2.17.0
+Keras Version: 3.5.0
 Python Version: 3.9.13
+Scikit-learn Version: 1.2.2
+Seaborn Version: 0.12.2
+CV2 Version: 4.10.0
+Pandas Version: 2.2.2
+
+
