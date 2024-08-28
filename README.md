@@ -33,6 +33,7 @@ Bladder cancer is a significant health concern, representing about 4% of all can
 - **Matplotlib:** 3.7.5
 - **Pandas:** 2.2.2
 - **NumPy:** 1.26.0
+- **Python Version:** 3.9.13
 
 ## 3. Data Preprocessing
 
